@@ -1,0 +1,30 @@
+<?php
+
+$proxy_ip = 'IP_DES_PROXY_SERVERS';
+$proxy_port = 'PORT_DES_PROXY_SERVERS';
+$proxy_username = 'USERNAME';
+$proxy_password = 'PASSWORD';
+
+$url = //////////////;
+
+$options = array(
+    CURLOPT_PROXY => $proxy_ip.':'.$proxy_port,
+    CURLOPT_PROXYUSERPWD => $proxy_username.':'.$proxy_password,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_HEADER => true
+);
+
+$ch = curl_init($url);
+curl_setopt_array($ch, $options);
+
+$result = curl_exec($ch);
+
+if(curl_errno($ch)) {
+    echo 'Error: ' . curl_error($ch);
+} else {
+    echo $result;
+}
+
+curl_close($ch);
+?>
